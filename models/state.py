@@ -1,8 +1,10 @@
 #!/usr/bin/python3
-""" Class State """
+''' clase State que hereda de BaseModel '''
+
 from models.base_model import BaseModel
 
 
 class State(BaseModel):
-    """ State class that inherits BaseModel"""
+    ''' Atributos de clase pública '''
+    # clase para crear un estado
     name = ""

@@ -1,10 +1,12 @@
 #!/usr/bin/python3
-""" User Class """
+''' class User that inherits from BaseModel '''
+
 from models.base_model import BaseModel
 
 
 class User(BaseModel):
-    """ User class that inherits BaseModel """
+    ''' Atributos de clase pública '''
+    # Define atributos para la creación de usuarios
     email = ""
     password = ""
     first_name = ""

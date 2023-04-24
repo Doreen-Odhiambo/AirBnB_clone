@@ -1,16 +1,40 @@
 #!/usr/bin/python3
-""" testing city """
+"""
+Unittest for user.py
+"""
 import unittest
-import pep8
 from models.city import City
+import datetime
 
-class City_testing(unittest.TestCase):
-    """ check BaseModel """
 
-    def testpep8(self):
-        """ testing codestyle """
-        pepstylecode = pep8.StyleGuide(quiet=True)
-        path_user = 'models/city.py'
-        result = pepstylecode.check_files([path_user])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+class TestCity(unittest.TestCase):
+    """Tests instances and methods from city class"""
+
+    c = City()
+
+    def test_class_exists(self):
+        """tests if class exists"""
+        self.assertEqual(str(type(self.c)), "<class 'models.city.City'>")
+
+    def test_user_inheritance(self):
+        """test if city is a subclass of BaseModel"""
+        self.assertTrue(self.c, City)
+
+    def testHasAttributes(self):
+        """verify if attributes exist"""
+        self.assertTrue(hasattr(self.c, 'state_id'))
+        self.assertTrue(hasattr(self.c, 'name'))
+        self.assertTrue(hasattr(self.c, 'id'))
+        self.assertTrue(hasattr(self.c, 'created_at'))
+        self.assertTrue(hasattr(self.c, 'updated_at'))
+
+    def test_types(self):
+        """tests if the type of the attribute is the correct one"""
+        self.assertIsInstance(self.c.state_id, str)
+        self.assertIsInstance(self.c.name, str)
+        self.assertIsInstance(self.c.id, str)
+        self.assertIsInstance(self.c.created_at, datetime.datetime)
+        self.assertIsInstance(self.c.updated_at, datetime.datetime)
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,16 +1,39 @@
 #!/usr/bin/python3
-""" testing State """
+"""
+Unittest for amenity.py
+"""
 import unittest
-import pep8
 from models.state import State
+import datetime
 
-class State_testing(unittest.TestCase):
-    """ check BaseModel """
 
-    def testpep8(self):
-        """ testing codestyle """
-        pepstylecode = pep8.StyleGuide(quiet=True)
-        path_user = 'models/state.py'
-        result = pepstylecode.check_files([path_user])
-        self.assertEqual(result.total_errors, 0,
-                         "Found code style errors (and warnings).")
+class TestState(unittest.TestCase):
+    """ Tests instances and methods from State class """
+
+    s = State()
+
+    def test_class_exists(self):
+        """tests if class exists"""
+        res = "<class 'models.state.State'>"
+        self.assertEqual(str(type(self.s)), res)
+
+    def test_user_inheritance(self):
+        """test if State is a subclass of BaseModel"""
+        self.assertIsInstance(self.s, State)
+
+    def testHasAttributes(self):
+        """verify if attributes exist"""
+        self.assertTrue(hasattr(self.s, 'name'))
+        self.assertTrue(hasattr(self.s, 'id'))
+        self.assertTrue(hasattr(self.s, 'created_at'))
+        self.assertTrue(hasattr(self.s, 'updated_at'))
+
+    def test_types(self):
+        """tests if the type of the attribute is the correct one"""
+        self.assertIsInstance(self.s.name, str)
+        self.assertIsInstance(self.s.id, str)
+        self.assertIsInstance(self.s.created_at, datetime.datetime)
+        self.assertIsInstance(self.s.updated_at, datetime.datetime)
+
+if __name__ == '__main__':
+    unittest.main()

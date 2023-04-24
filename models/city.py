@@ -1,9 +1,11 @@
 #!/usr/bin/python3
-""" Class City """
+''' clase City que hereda de BaseModel '''
+
 from models.base_model import BaseModel
 
 
 class City(BaseModel):
-    """ City class that inherits BaseModel """
+    ''' Atributos de clase pública '''
+    # Define ciudad para buscar
     state_id = ""
     name = ""
