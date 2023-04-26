@@ -182,10 +182,3 @@ $
 (hbnb)
 ```
 
-### :black_nib: Authors
-***
-*Holberton School Students*
-
-Yuri Quezada - [Github](https://github.com/yuriquezada) | [LinkedIn](https://www.linkedin.com/in/yuriquezada/)
-
-Geraldine Meneses - [Github](https://github.com/nitaly31) | [LinkedIn](https://www.linkedin.com/in/geraldine-meneses/)
