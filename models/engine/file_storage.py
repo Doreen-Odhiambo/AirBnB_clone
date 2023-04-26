@@ -1,6 +1,6 @@
 #!/usr/bin/python3
-''' Clase FileStorage que serializa instancias en un archivo JSON y
-deserializa un archivo JSON en instancias '''
+'''FileStorage class that serializes instances into a JSON file and
+deserialize a JSON file into instances'''
 
 import json
 from models.base_model import BaseModel
@@ -17,56 +17,57 @@ date = {"BaseModel": BaseModel, "User": User, "State": State,
 
 
 class FileStorage:
-    ''' Clase que gestiona el almacenamiento de modelos
-        hbnb en formato JSON '''
-    # cadena: ruta al archivo JSON
+    '''Class that manages model storage
+        hbnb in JSON format'''
+    # string: path to the JSON file
     __file_path = "file.json"
-    # diccionario - vacío
+    # dictionary - empty
     __objects = {}
 
     def all(self):
-        ''' Devuelve el diccionario __objects '''
+        ''' Returns the __objects dictionary '''
         return FileStorage.__objects
 
     def new(self, obj):
-        ''' establece en __objects el obj con la clave <obj class name>.id '''
-        # Almacenará todos los objetos por <nombre de clase>.id
-        # Ej. Para almacenar un objeto BaseModel con id = 12121212,
-        # la clave será BaseModel.12121212
+        ''' sets to __objects the obj with the key <obj class name>.id'''
+       # Will store all objects by <class name>.id
+        # eg to store a BaseModel object with id = 12121212,
+        # the key will be BaseModel.12121212
         key = obj.__class__.__name__ + "." + obj.id
         self.__objects[key] = obj
 
     def save(self):
-        ''' Serializa __objects en el archivo JSON (ruta: __file_path) '''
+        ''' Serialize __objects into the JSON file (path: __file_path)'''
         dic_obj = {}
-        # Operación de escritura:
-        # Creo el archivo json donde se almacenara la información a serializar
+        # Write operation:
+        # Create the json file where the information to be serialized will be stored
         with open(self.__file_path, "w", encoding="utf-8") as f:
-            # Recorro los valores ingresados
+            # Loop through the entered values
             for key, value in self.__objects.items():
-                # Asigno el valor al dic_obj en su clave
+                # I assign the value to the dic_obj in its keye
                 dic_obj[key] = value.to_dict()
-                # Convierte los objetos de Python en objetos json apropiados
-                # para almacenarse en un archivo
+                # Convert Python objects to proper json objects
+                # to be stored in a file
             json.dump(dic_obj, f)
 
     def reload(self):
         '''
-        Deserializa el archivo JSON a __objects
-        (solo si el archivo JSON (__file_path) existe; de ​​lo contrario,
-        si el archivo no existe, no se debe generar ninguna excepción)
+        Deserialize the JSON file to __objects
+        (only if the JSON file (__file_path) exists, otherwise
+        if the file does not exist, no exception should be thrown)
         '''
         try:
-            # Operación de lectura:
-            # Se abre el archivo para lectura
+            
+             # read operation:
+            # open the file for reading
             with open(self.__file_path, 'r', encoding='UTF-8') as f:
-                # Se deserializa el archivo
+                # The file is deserialized
                 j_dic = json.load(f)
-            # Se recorre el contenido del archivo deserializado
+            # The contents of the deserialized file are traversed
             for key in j_dic:
                 value = date[j_dic[key]["__class__"]](**j_dic[key])
-                # Establece los nuevos valores del objeto
+                # Sets the new values ​​of the object
                 self.__objects[key] = value
-        # Se genera cuando se solicita un archivo o directorio pero no existe
+        # Raised when a file or directory is requested but does not exist
         except FileNotFoundError:
             pass
