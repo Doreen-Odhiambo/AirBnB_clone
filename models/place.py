@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-''' Clase Place que hereda de BaseModel '''
+'''Place class inheriting from BaseModel '''
 
 from models.base_model import BaseModel
 
 
 class Place(BaseModel):
-    ''' Atributos de clase pública '''
-    # Define la clase de lugar
+    ''' public class attributes '''
+    # Defines the class of place
     city_id = ""
     user_id = ""
     name = ""
