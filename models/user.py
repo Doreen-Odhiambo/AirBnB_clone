@@ -5,8 +5,8 @@ from models.base_model import BaseModel
 
 
 class User(BaseModel):
-    ''' Atributos de clase pública '''
-    # Define atributos para la creación de usuarios
+    ''' public class attributes '''
+    # Define attributes for user creation
     email = ""
     password = ""
     first_name = ""
